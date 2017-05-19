@@ -244,6 +244,13 @@ public class YaraLibrary implements Closeable {
         return yara_match_value(null, pv);
     }
 
+    private final native Object yara_match_data(JNIEnv env, @JniArg(cast = "void*") long pv);
+    public byte[] matchValueRaw(long pv) {
+        Preconditions.checkState(library != null);
+        return (byte[])yara_match_data(null, pv);
+    
+    }
+
     /*
         Modules
      */

@@ -154,6 +154,23 @@ yara_match_value(JNIEnv *env, void *v) {
     return value;
 }
 
+static jbyteArray
+yara_match_data(JNIEnv *env, void *v) {
+    YR_MATCH *match = (YR_MATCH *)v;
+    
+    if (!v) {
+        return 0;
+    }
+    
+    jbyte bytes[match->data_length];
+    jbyteArray ret = (*env)->NewByteArray(env, match->data_length);
+    memcpy(bytes, match->data, sizeof(uint8_t));
+    
+    (*env)->SetByteArrayRegion(env, ret, 0, match->data_length, bytes);
+    
+    return ret;
+}
+
 /*
  *  Compilation
  */

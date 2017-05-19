@@ -28,6 +28,15 @@ public class YaraMatchImpl implements YaraMatch {
     }
 
     /**
+     * Raw bytes of match value.
+     * 
+     * @return
+     */
+    public byte[] getValueBytes() {
+        return library.matchValueRaw(peer);   
+    }
+
+    /**
      * Offset where match was found
      * @return
      */

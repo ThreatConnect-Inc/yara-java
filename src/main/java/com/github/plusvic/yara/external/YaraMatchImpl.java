@@ -1,6 +1,5 @@
 package com.github.plusvic.yara.external;
 
-
 import com.github.plusvic.yara.YaraMatch;
 
 public class YaraMatchImpl implements YaraMatch {
@@ -15,6 +14,15 @@ public class YaraMatchImpl implements YaraMatch {
     @Override
     public String getValue() {
         return value;
+    }
+
+    /**
+     * Raw bytes of match value.
+     * 
+     * @return
+     */
+    public byte[] getValueBytes() {
+        return getValue().getBytes();
     }
 
     @Override
