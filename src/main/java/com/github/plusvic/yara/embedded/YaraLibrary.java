@@ -238,17 +238,10 @@ public class YaraLibrary implements Closeable {
         return yara_match_offset(null, pv);
     }
 
-    private final native String yara_match_value(JNIEnv env, @JniArg(cast = "void*") long pv);
-    public String matchValue(long pv) {
+    private final native String yara_match_value(JNIEnv env, @JniArg(cast = "void*") long pv, @JniArg(cast = "void*") long sv);
+    public String matchValue(long pv, long sv) {
         Preconditions.checkState(library != null);
-        return yara_match_value(null, pv);
-    }
-
-    private final native Object yara_match_data(JNIEnv env, @JniArg(cast = "void*") long pv);
-    public byte[] matchValueRaw(long pv) {
-        Preconditions.checkState(library != null);
-        return (byte[])yara_match_data(null, pv);
-    
+        return yara_match_value(null, pv, sv);
     }
 
     /*

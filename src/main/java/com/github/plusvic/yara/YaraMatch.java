@@ -10,13 +10,6 @@ public interface YaraMatch {
      * @return
      */
     String getValue();
-    
-    /**
-     * Raw bytes of match value.
-     * 
-     * @return
-     */
-    byte[] getValueBytes(); 
 
     /**
      * Offset where match was found

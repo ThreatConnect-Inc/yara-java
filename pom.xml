@@ -21,7 +21,7 @@
         <hawtjni-version>1.14</hawtjni-version>
         <hawtjni-verbose>true</hawtjni-verbose>
         <easymock-version>3.2</easymock-version>
-        <jni-with-crypto>-lcrypto</jni-with-crypto>
+        <jni-with-crypto>-lcrypto -lcrypto -lcrypto</jni-with-crypto>
     </properties>
 
     <dependencies>

@@ -16,14 +16,6 @@ public class YaraMatchImpl implements YaraMatch {
         return value;
     }
 
-    /**
-     * Raw bytes of match value.
-     * 
-     * @return
-     */
-    public byte[] getValueBytes() {
-        return getValue().getBytes();
-    }
 
     @Override
     public long getOffset() {

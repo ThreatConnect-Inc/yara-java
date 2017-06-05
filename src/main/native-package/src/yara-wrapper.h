@@ -132,43 +132,52 @@ yara_match_offset(JNIEnv *env, void *v) {
             ((YR_MATCH*)v)->offset;
 }
 
+static char *
+format_hex_string(uint8_t* data, int length) {
+    char *buffer;
+    char *write;
+    if (0 != (buffer = (char *)malloc(32 * 5 * sizeof(char)))) {
+        memset(buffer, 0, 32 * 5 * sizeof(char));
+        write = buffer;
+        int i;
+        for (i = 0; i < min(32, length); i++) {
+            write += sprintf(write, "%s%02X", (i == 0 ? "" : " "), (uint8_t) data[i]);
+        }
+    }
+    
+    sprintf(write, "%s", length > 32 ? " ..." : "");
+    
+    return buffer;
+}
+
 static jstring
-yara_match_value(JNIEnv *env, void *v) {
+yara_match_value(JNIEnv *env, void *m, void *s) {
     char *buffer = 0;
-    YR_MATCH *match = (YR_MATCH *)v;
+    YR_MATCH *match = (YR_MATCH *)m;
+    YR_STRING *string = (YR_STRING *)s;
     jstring value = 0;
 
-    if (!v) {
+    if (!m) {
         return 0;
     }
 
+
     if (0 != (buffer = malloc(match->data_length + 1))) {
         memset(buffer, 0, match->data_length + 1);
-        strncpy(buffer, (const char* )match->data, match->data_length);
-
+        if (STRING_IS_HEX(string)) {
+          char *hexFormatted = format_hex_string(match->data, match->data_length);
+          value = cast_jstring(env, hexFormatted);
+          free(hexFormatted);
+        } else {
+          print_string(match->data, match->data_length);
+          strncpy(buffer, (const char* )match->data, match->data_length);
+        }
         value = cast_jstring(env, buffer);
 
         free(buffer);
     }
 
     return value;
-}
-
-static jbyteArray
-yara_match_data(JNIEnv *env, void *v) {
-    YR_MATCH *match = (YR_MATCH *)v;
-    
-    if (!v) {
-        return 0;
-    }
-    
-    jbyte bytes[match->data_length];
-    jbyteArray ret = (*env)->NewByteArray(env, match->data_length);
-    memcpy(bytes, match->data, sizeof(uint8_t));
-    
-    (*env)->SetByteArrayRegion(env, ret, 0, match->data_length, bytes);
-    
-    return ret;
 }
 
 /*

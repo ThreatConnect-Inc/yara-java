@@ -10,13 +10,16 @@ import static com.github.plusvic.yara.Preconditions.checkArgument;
 public class YaraMatchImpl implements YaraMatch {
     private final YaraLibrary library;
     private final long peer;
+    private final long stringPeer;
 
-    YaraMatchImpl(YaraLibrary library, long peer) {
+    YaraMatchImpl(YaraLibrary library, long peer, long stringPeer) {
         checkArgument(library != null);
         checkArgument(peer != 0);
+        checkArgument(stringPeer != 0);
 
         this.library = library;
         this.peer = peer;
+        this.stringPeer = stringPeer;
     }
 
     /**
@@ -24,16 +27,7 @@ public class YaraMatchImpl implements YaraMatch {
      * @return
      */
     public String getValue() {
-        return library.matchValue(peer);
-    }
-
-    /**
-     * Raw bytes of match value.
-     * 
-     * @return
-     */
-    public byte[] getValueBytes() {
-        return library.matchValueRaw(peer);   
+        return library.matchValue(peer, stringPeer);
     }
 
     /**

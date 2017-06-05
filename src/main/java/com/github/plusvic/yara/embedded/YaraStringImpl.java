@@ -50,7 +50,7 @@ public class YaraStringImpl implements YaraString {
                 long last = index;
                 index = library.stringMatchNext(index);
 
-                return new YaraMatchImpl(library, last);
+                return new YaraMatchImpl(library, last, peer);
             }
         };
     }
