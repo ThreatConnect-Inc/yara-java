@@ -37,7 +37,7 @@ public class YaraScannerImplTest {
             "	my_identifier_3 = true\n" +
             "\tstrings:\n"+
             "\t\t$a = \"Hello world\"\n"+
-            "\t\t$b = { 48 65 6c 6c 6f 20 77 6f 72 6c 64 }\n"+
+            "\t\t$b = { 48 65 6c 6c 6f 20 77 6f 72 6c 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 }\n"+
             "\n"+
             "\tcondition:\n"+
             "\t\tany of them\n"+
@@ -121,7 +121,7 @@ public class YaraScannerImplTest {
     public void testScanMatch() throws Exception {
         // Write test file
         File temp = File.createTempFile(UUID.randomUUID().toString(), ".tmp");
-        Files.write(Paths.get(temp.getAbsolutePath()), "Hello world".getBytes(), StandardOpenOption.WRITE);
+        Files.write(Paths.get(temp.getAbsolutePath()), "Hello worldddddddddddddddddddddddddd".getBytes(), StandardOpenOption.WRITE);
 
 
         //
