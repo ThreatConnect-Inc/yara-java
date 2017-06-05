@@ -151,7 +151,7 @@ format_hex_string(uint8_t* data, int length) {
     
     sprintf(write, "%s", length > 32 ? " ..." : "");
     
-    
+    printf("Final hex string: %s\n", buffer);
     return buffer;
 }
 
