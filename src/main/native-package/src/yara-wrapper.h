@@ -169,7 +169,6 @@ yara_match_value(JNIEnv *env, void *m, void *s) {
           value = cast_jstring(env, hexFormatted);
           free(hexFormatted);
         } else {
-          print_string(match->data, match->data_length);
           strncpy(buffer, (const char* )match->data, match->data_length);
         }
         value = cast_jstring(env, buffer);
