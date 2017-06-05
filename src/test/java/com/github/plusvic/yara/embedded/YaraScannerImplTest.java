@@ -40,7 +40,7 @@ public class YaraScannerImplTest {
             "\t\t$b = { 48 65 6c 6c 6f 20 77 6f 72 6c 64 }\n"+
             "\n"+
             "\tcondition:\n"+
-            "\t\t$a\n"+
+            "\t\tany of them\n"+
             "}" +
             "rule NoMatch \n"+
             "{\n"+
