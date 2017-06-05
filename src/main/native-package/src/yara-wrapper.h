@@ -169,13 +169,14 @@ yara_match_value(JNIEnv *env, void *m, void *s) {
 
     if (STRING_IS_HEX(string)) {
       char *buffer = format_hex_string(match->data, match->data_length);
-      printf("Got hex string: %s\n", hexFormatted);
     } else {
         if (0 != (buffer = malloc(match->data_length + 1))) {
             memset(buffer, 0, match->data_length + 1);
             strncpy(buffer, (const char* )match->data, match->data_length);
         }
     }
+    printf("Got string: %s\n", buffer);
+
     value = cast_jstring(env, buffer);
 
     free(buffer);
