@@ -383,10 +383,10 @@ public class YaraScannerImplTest {
 
         assertTrue(strings.hasNext());
         string = strings.next();
-        Iterator<YaraMatch> matches = string.getMatches();
+        matches = string.getMatches();
         assertTrue(matches.hasNext());
 
-        YaraMatch match = matches.next();
+        match = matches.next();
         assertEquals(0, match.getOffset());
         System.out.println(match.getValue());
         //assertEquals("Hello world", match.getValue());
