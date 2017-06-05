@@ -37,6 +37,7 @@ public class YaraScannerImplTest {
             "	my_identifier_3 = true\n" +
             "\tstrings:\n"+
             "\t\t$a = \"Hello world\"\n"+
+            "\t\t$hexa = { 48 65 6c 6c 6f 20 77 6f 72 6c 64 }\n"+
             "\n"+
             "\tcondition:\n"+
             "\t\t$a\n"+
