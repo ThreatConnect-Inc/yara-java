@@ -315,7 +315,7 @@ public class YaraScannerImplTest {
         YaraCompilationCallback compileCallback = new YaraCompilationCallback() {
             @Override
             public void onError(ErrorLevel errorLevel, String fileName, long lineNumber, String message) {
-                System.out.println(String.format("%s: [%s:%l] %s", errorLevel, fileName, lineNumber, message));
+                System.out.println(String.format("%s: [%s:%d] %s", errorLevel, fileName, lineNumber, message));
                 fail();
             }
         };
