@@ -140,7 +140,8 @@ format_hex_string(uint8_t* data, int length) {
         memset(buffer, 0, 32 * 5 * sizeof(char));
         write = buffer;
         int i;
-        for (i = 0; i < min(32, length); i++) {
+        int size = length > 32 ? 32 : length;
+        for (i = 0; i < size; i++) {
             write += sprintf(write, "%s%02X", (i == 0 ? "" : " "), (uint8_t) data[i]);
         }
     }
