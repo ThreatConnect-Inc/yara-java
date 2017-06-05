@@ -171,6 +171,7 @@ yara_match_value(JNIEnv *env, void *m, void *s) {
         memset(buffer, 0, match->data_length + 1);
         if (STRING_IS_HEX(string)) {
           char *hexFormatted = format_hex_string(match->data, match->data_length);
+          printf("Got hex string: %s\n", hexFormatted);
           value = cast_jstring(env, hexFormatted);
           free(hexFormatted);
         } else {
