@@ -136,17 +136,21 @@ static char *
 format_hex_string(uint8_t* data, int length) {
     char *buffer;
     char *write;
+    printf("Formatting hex string\n");
     if (0 != (buffer = (char *)malloc(32 * 5 * sizeof(char)))) {
         memset(buffer, 0, 32 * 5 * sizeof(char));
         write = buffer;
         int i;
         int size = length > 32 ? 32 : length;
+        printf("Length = %d\n", size);
         for (i = 0; i < size; i++) {
+            printf("appending: %s%02X\n", (i == 0 ? "" : " "), (uint8_t) data[i]);
             write += sprintf(write, "%s%02X", (i == 0 ? "" : " "), (uint8_t) data[i]);
         }
     }
     
     sprintf(write, "%s", length > 32 ? " ..." : "");
+    
     
     return buffer;
 }
