@@ -388,8 +388,7 @@ public class YaraScannerImplTest {
 
         match = matches.next();
         assertEquals(0, match.getOffset());
-        System.err.println("Match ==== " + match.getValue());
-        //assertEquals("Hello world", match.getValue());
+        assertEquals("48 65 6C 6C 6F 20 77 6F 72 6C 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 ...", match.getValue());
         
     }
 
