@@ -381,7 +381,16 @@ public class YaraScannerImplTest {
         assertEquals("Hello world", match.getValue());
         assertFalse(matches.hasNext());
 
-        assertFalse(strings.hasNext());
+        assertTrue(string.hasNext);
+        string = strings.next()
+        Iterator<YaraMatch> matches = string.getMatches();
+        assertTrue(matches.hasNext());
+
+        YaraMatch match = matches.next();
+        assertEquals(0, match.getOffset());
+        System.out.println(match.getValue());
+        //assertEquals("Hello world", match.getValue());
+        
     }
 
     private void assertTags(Iterator<String> tags) {
