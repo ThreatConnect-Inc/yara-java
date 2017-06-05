@@ -167,15 +167,15 @@ yara_match_value(JNIEnv *env, void *m, void *s) {
     }
 
 
-    if (0 != (buffer = malloc(match->data_length + 1))) {
-        memset(buffer, 0, match->data_length + 1);
+
         if (STRING_IS_HEX(string)) {
-          char *hexFormatted = format_hex_string(match->data, match->data_length);
+          char *buffer = format_hex_string(match->data, match->data_length);
           printf("Got hex string: %s\n", hexFormatted);
-          value = cast_jstring(env, hexFormatted);
-          free(hexFormatted);
         } else {
-          strncpy(buffer, (const char* )match->data, match->data_length);
+            if (0 != (buffer = malloc(match->data_length + 1))) {
+                memset(buffer, 0, match->data_length + 1);
+                strncpy(buffer, (const char* )match->data, match->data_length);
+            }
         }
         value = cast_jstring(env, buffer);
 
