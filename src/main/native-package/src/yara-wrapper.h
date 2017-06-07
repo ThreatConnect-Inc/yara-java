@@ -139,8 +139,8 @@ format_hex_string(uint8_t* data, int length, JNIEnv *env) {
     jstring value = 0;
 
     printf("Formatting hex string\n");
-    if (0 != (buffer = (char *)malloc(32 * 5 * sizeof(char)))) {
-        memset(buffer, 0, 32 * 5 * sizeof(char));
+    if (0 != (buffer = (char *)malloc(32 * 5)) {
+        memset(buffer, 0, 32 * 5);
         write = buffer;
         int i;
         int size = length > 32 ? 32 : length;
@@ -170,15 +170,16 @@ format_wide_string(uint8_t* data, int length, JNIEnv *env)
     char *write;
     jstring value = 0;
 
-    if (0 != (buffer = (char *)malloc(32 * 5 * sizeof(char)))) {
-        memset(buffer, 0, 32 * 5 * sizeof(char));
+    if (0 != (buffer = (char *)malloc(length * 5))) {
+        memset(buffer, 0, length * 5);
         write = buffer;
         int i;
         for (i = 0; i < length; i++) {
-            if (str[i] >= 32 && str[i] <= 126)
+            if (str[i] >= 32 && str[i] <= 126) {
                 write += sprintf(write, "%c", str[i]);
-            else
+            } else {
                 write += sprintf(write, "\\x%02X", (uint8_t)str[i]);
+            }
         }
     }
     

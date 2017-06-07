@@ -133,7 +133,12 @@ public class YaraLibrary implements Closeable {
         Preconditions.checkState(library != null);
         return format_hex_string(data, length, null);
     }
-
+    private final native String format_wide_string( @JniArg(cast = "void*") long data, @JniArg(cast = "int") int length, JNIEnv env);
+    public String formatWideString(long data, int length) {
+        Preconditions.checkState(library != null);
+        return format_wide_string(data, length, null);
+    }
+    
     /*
         Rules
      */
