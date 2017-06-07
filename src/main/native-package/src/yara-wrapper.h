@@ -163,6 +163,33 @@ format_hex_string(uint8_t* data, int length, JNIEnv *env) {
     
 
 static jstring
+void format_wide_string(uint8_t* data, int length, JNIEnv *env)
+{
+    char* str = (char*) (data);
+    char *buffer;
+    char *write;
+    jstring value = 0;
+
+    if (0 != (buffer = (char *)malloc(32 * 5 * sizeof(char)))) {
+        memset(buffer, 0, 32 * 5 * sizeof(char));
+        write = buffer;
+        int i;
+        for (i = 0; i < length; i++) {
+            if (str[i] >= 32 && str[i] <= 126)
+                write += sprintf(write, "%c", str[i]);
+            else
+                write += sprintf(write, "\\x%02X", (uint8_t)str[i]);
+        }
+    }
+    
+    value = cast_jstring(env, buffer);
+
+    free(buffer);
+    
+    return value;
+}
+
+static jstring
 yara_match_value(JNIEnv *env, void *m, void *s) {
     YR_MATCH *match = (YR_MATCH *)m;
     YR_STRING *string = (YR_STRING *)s;
@@ -177,23 +204,7 @@ yara_match_value(JNIEnv *env, void *m, void *s) {
         return format_hex_string(match->data, match->data_length, env);
     } else if (STRING_IS_WIDE(string)) {
         printf("String is wide!\n");
-        jchar *buffer = 0;
-        if (0 != (buffer = malloc(match->data_length))) {
-            memset(buffer, 0, match->data_length);
-            memcpy(buffer, match->data, match->data_length);
-            
-            int i;
-            for (i = 0; i < match->data_length / 2; i++) {
-                printf("%04X ", (jchar)buffer[i]);
-            }
-            printf("\n");
-            
-            jstring value = (*env)->NewString(env, buffer, match->data_length / 2);
-            
-            free(buffer);
-            
-            return value;
-        }
+        return format_wide_string(match->data, match->data_length, env);
     } else {
         printf("String is text!\n");
         char *buffer = 0;
