@@ -38,7 +38,7 @@ public class YaraScannerImplTest {
             "	my_identifier_3 = true\n" +
             "\tstrings:\n"+
             "\t\t$a = \"ⁱ\"wide\n"+
-            "\t\t$ac= \"Hello world\"\n"+
+            "\t\t$c= \"Hello world\"\n"+
             "\t\t$b = { 48 65 6c 6c 6f 20 77 6f 72 6c 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 }\n"+
             "\n"+
             "\tcondition:\n"+
