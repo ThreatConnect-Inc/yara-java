@@ -305,7 +305,7 @@ public class YaraScannerImplTest {
     public void testScanModule() throws Exception {
         // Write test file
         File temp = File.createTempFile(UUID.randomUUID().toString(), ".tmp");
-        Files.write(Paths.get(temp.getAbsolutePath()), "Hello world".getBytes(), StandardOpenOption.WRITE);
+        Files.write(Paths.get(temp.getAbsolutePath()), "Hello world".getBytes(CharSet.forName("UTF-16"), StandardOpenOption.WRITE);
 
         Map<String, String> args = new HashMap();
         args.put("pe", temp.getAbsolutePath());
