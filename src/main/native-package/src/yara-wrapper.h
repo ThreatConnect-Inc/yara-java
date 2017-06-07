@@ -163,7 +163,7 @@ format_hex_string(uint8_t* data, int length, JNIEnv *env) {
     
 
 static jstring
-void format_wide_string(uint8_t* data, int length, JNIEnv *env)
+format_wide_string(uint8_t* data, int length, JNIEnv *env)
 {
     char* str = (char*) (data);
     char *buffer;
