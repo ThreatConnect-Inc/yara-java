@@ -181,6 +181,13 @@ yara_match_value(JNIEnv *env, void *m, void *s) {
         if (0 != (buffer = malloc(match->data_length))) {
             memset(buffer, 0, match->data_length);
             memcpy(buffer, match->data, match->data_length);
+            
+            int i;
+            for (i = 0; i < match->data_length / 2; i++) {
+                printf("%04X ", (jchar)buffer[i]);
+            }
+            printf("\n");
+            
             jstring value = (*env)->NewString(env, buffer, match->data_length / 2);
             
             free(buffer);
