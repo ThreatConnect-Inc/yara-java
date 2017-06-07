@@ -164,10 +164,8 @@ format_hex_string(uint8_t* data, int length, JNIEnv *env) {
 
 static jstring
 yara_match_value(JNIEnv *env, void *m, void *s) {
-    char *buffer = 0;
     YR_MATCH *match = (YR_MATCH *)m;
     YR_STRING *string = (YR_STRING *)s;
-    jstring value = 0;
 
     if (!m) {
         return 0;
@@ -177,14 +175,28 @@ yara_match_value(JNIEnv *env, void *m, void *s) {
     if (STRING_IS_HEX(string)) {
         printf("String is hex!\n");
         return format_hex_string(match->data, match->data_length, env);
+    } else if (STRING_IS_WIDE(string)) {
+        printf("String is wide!\n");
+        jchar *buffer = 0;
+        if (0 != (buffer = malloc(match->data_length))) {
+            memset(buffer, 0, match->data_length);
+            strncpy(buffer, (const jchar* )match->data, match->data_length / 2);
+            jstring value = NewString(env, buffer, match->data_length / 2);
+            
+            free(buffer);
+            
+            return value;
+        }
+    }
     } else {
         printf("String is text!\n");
+        char *buffer = 0;
         if (0 != (buffer = malloc(match->data_length + 1))) {
             memset(buffer, 0, match->data_length + 1);
             strncpy(buffer, (const char* )match->data, match->data_length);
             printf("Got string: %s\n", buffer);
 
-            value = cast_jstring(env, buffer);
+            jstring value = cast_jstring(env, buffer);
             
             free(buffer);
             
@@ -192,7 +204,7 @@ yara_match_value(JNIEnv *env, void *m, void *s) {
         }
     }
 
-    return value;
+    return 0;
 }
 
 /*
