@@ -136,18 +136,22 @@ static char *
 format_hex_string(uint8_t* data, int length) {
     char *buffer;
     char *write;
+    printf("Formatting hex string\n");
     if (0 != (buffer = (char *)malloc(32 * 5 * sizeof(char)))) {
         memset(buffer, 0, 32 * 5 * sizeof(char));
         write = buffer;
         int i;
         int size = length > 32 ? 32 : length;
+        printf("Length = %d\n", size);
         for (i = 0; i < size; i++) {
+            printf("appending: %s%02X\n", (i == 0 ? "" : " "), (uint8_t) data[i]);
             write += sprintf(write, "%s%02X", (i == 0 ? "" : " "), (uint8_t) data[i]);
         }
     }
     
     sprintf(write, "%s", length > 32 ? " ..." : "");
     
+    printf("Final hex string: %s\n", buffer);
     return buffer;
 }
 
@@ -164,13 +168,16 @@ yara_match_value(JNIEnv *env, void *m, void *s) {
 
 
     if (STRING_IS_HEX(string)) {
+        printf("String is hex!\n");
       buffer = format_hex_string(match->data, match->data_length);
     } else {
+        printf("String is text!\n");
         if (0 != (buffer = malloc(match->data_length + 1))) {
             memset(buffer, 0, match->data_length + 1);
             strncpy(buffer, (const char* )match->data, match->data_length);
         }
     }
+    printf("Got string: %s\n", buffer);
 
     value = cast_jstring(env, buffer);
 
