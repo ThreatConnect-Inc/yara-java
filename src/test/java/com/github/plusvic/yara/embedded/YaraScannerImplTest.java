@@ -390,7 +390,7 @@ public class YaraScannerImplTest {
 
         match = matches.next();
         assertEquals(0, match.getOffset());
-        assertEquals("48 65 6C 6C 6F 20 77 6F 72 6C 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 ...", match.getValue());
+        assertEquals("48 65 6C 6C 6F 20 77 6F 72 6C 64", match.getValue());
         
     }
 
