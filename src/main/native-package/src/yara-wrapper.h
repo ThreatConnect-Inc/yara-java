@@ -158,7 +158,7 @@ format_hex_string(uint8_t* data, int length, JNIEnv *env) {
 
     free(buffer);
     
-    return value
+    return value;
 }
     
 
