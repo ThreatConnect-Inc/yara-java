@@ -139,7 +139,7 @@ format_hex_string(uint8_t* data, int length, JNIEnv *env) {
     jstring value = 0;
 
     printf("Formatting hex string\n");
-    if (0 != (buffer = (char *)malloc(32 * 5)) {
+    if (0 != (buffer = (char *)malloc(32 * 5))) {
         memset(buffer, 0, 32 * 5);
         write = buffer;
         int i;
