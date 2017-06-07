@@ -129,9 +129,9 @@ public class YaraLibrary implements Closeable {
     }
 
     private final native String format_hex_string( @JniArg(cast = "void*") long data, @JniArg(cast = "int") int length, JNIEnv env);
-    public String toString(long pv) {
+    public String formatHexString(long data, int length) {
         Preconditions.checkState(library != null);
-        return cast_jstring(null, pv);
+        return format_hex_string(data, length, null);
     }
 
     /*
