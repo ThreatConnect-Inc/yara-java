@@ -132,7 +132,7 @@ yara_match_offset(JNIEnv *env, void *v) {
             ((YR_MATCH*)v)->offset;
 }
 
-static char *
+static jstring
 format_hex_string(uint8_t* data, int length, JNIEnv *env) {
     char *buffer;
     char *write;
