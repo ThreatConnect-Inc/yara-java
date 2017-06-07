@@ -187,7 +187,6 @@ yara_match_value(JNIEnv *env, void *m, void *s) {
             
             return value;
         }
-    }
     } else {
         printf("String is text!\n");
         char *buffer = 0;
