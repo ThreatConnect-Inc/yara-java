@@ -180,7 +180,7 @@ yara_match_value(JNIEnv *env, void *m, void *s) {
         jchar *buffer = 0;
         if (0 != (buffer = malloc(match->data_length))) {
             memset(buffer, 0, match->data_length);
-            strncpy(buffer, (const jchar* )match->data, match->data_length / 2);
+            memcpy(buffer, match->data, match->data_length);
             jstring value = NewString(env, buffer, match->data_length / 2);
             
             free(buffer);
