@@ -123,7 +123,7 @@ public class YaraScannerImplTest {
     public void testScanMatch() throws Exception {
         // Write test file
         File temp = File.createTempFile(UUID.randomUUID().toString(), ".tmp");
-        Files.write(Paths.get(temp.getAbsolutePath()), "ⁱ".getBytes(Charset.forName("UTF-16")), StandardOpenOption.WRITE);
+        Files.write(Paths.get(temp.getAbsolutePath()), "Hello world".getBytes(), StandardOpenOption.WRITE);
 
 
         //
