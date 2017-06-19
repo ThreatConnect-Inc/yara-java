@@ -178,7 +178,7 @@ format_wide_string(uint8_t* data, int length, JNIEnv *env)
             if (str[i] >= 32 && str[i] <= 126) {
                 write += sprintf(write, "%c", str[i]);
             } else {
-                write += sprintf(write, "\x%02X", (uint8_t)str[i]);
+                write += sprintf(write, "\\x%02X", (uint8_t)str[i]);
             }
         }
     }
